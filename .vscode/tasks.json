@@ -4,26 +4,44 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build - Debug",
-            "problemMatcher": "$msCompile",
+            "label": "Run Renode",
             "type": "shell",
-            "command": "./build.sh -d",
-            "group": "build",
-            "presentation": {
-                "reveal": "silent",
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "Build - Release",
-            "problemMatcher": "$msCompile",
-            "type": "shell",
-            "command": "./build.sh",
+            "command": "C:\\Workspace\\renode\\output\\bin\\Release\\Renode.exe",
+            "args": [
+                //"C:\\Workspace\\renode\\resc\\STM32U585_8756_bues.resc"
+                "C:\\Workspace\\renode\\resc\\STM32U585_874x_bues.resc"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "source": "Renode",
+                "pattern": {
+                    "regexp": ""
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Renode, version .*",
+                    "endsPattern": ".*GDB server with all CPUs started on port.*"
+                }
+            },
             "group": "build",
             "presentation": {
                 "reveal": "always",
-                "panel": "shared"
+                "panel": "dedicated"
             }
+        },
+        {
+            "label": "Close Renode",
+            "command": "echo ${input:terminate}",
+            "type": "shell",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "terminate",
+            "type": "command",
+            "command": "workbench.action.tasks.terminate",
+            "args": "terminateAll"
         }
     ]
 }

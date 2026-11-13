@@ -106,12 +106,16 @@ otp: Memory.MappedMemory @ sysbus 0x0BFA0000
 i2c2: I2C.STM32U585_I2C @ sysbus 0x40005800
     EventInterrupt -> nvic@57
     ErrorInterrupt -> nvic@58
+    DmaTxRequest -> gpdma1@16
+    DmaRxRequest -> gpdma1@15
 
-sensor: Sensors.Coriolis_Replaysensor.CoriolisSensor @ i2c2 0x41
+//sensor: Sensors.Coriolis_Replaysensor.CoriolisSensor @ i2c2 0x41
+sensor: Sensors.Capillar_Sensor.CapillarSensor @ i2c2 0x42
 
 i2c1: I2C.STM32U585_I2C @ sysbus 0x40005400
     EventInterrupt -> nvic@55
     ErrorInterrupt -> nvic@56
+    
 
 eeprom_mem: Memory.ArrayMemory @ sysbus
     size: 0x10000
@@ -119,6 +123,14 @@ eeprom_mem: Memory.ArrayMemory @ sysbus
 eeprom: Memory.GenericI2cEeprom @ i2c1 0x50
     memory: eeprom_mem
     addressBitSize: 16
+
+gpdma1:DMA.STM32U585_DMA @ sysbus 0x40020000
+    numberOfChannels: 16
+    [0-7] -> nvic@[29-36]
+    [8-15] -> nvic@[80-87]
+    
+    
+//Connecting request lines to the NVIC Lines
 
 
 

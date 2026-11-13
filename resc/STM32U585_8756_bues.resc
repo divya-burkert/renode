@@ -7,8 +7,11 @@ mach create "STM32U585_8756_bues"
 machine LoadPlatformDescription @platforms/cpus/stm32u585.repl
 
 # Load Firmware 
-#sysbus LoadELF @C:\Workspace\8756_bueS\A.17.00\cmake-build-GNU_STM32U5_Debug\UserArea\UserArea.elf
-sysbus LoadELF @C:\Workspace\8756_bueS\trunk\cmake-build-GNU_STM32U5_Debug\UserArea\UserArea.elf
+sysbus LoadELF @C:\Workspace\A.17.00\cmake-build-GNU_STM32U5_Debug\UserArea\UserArea.elf
+#sysbus LoadELF @C:\Workspace\8756_bueS\trunk\cmake-build-GNU_STM32U5_Debug\UserArea\UserArea.elf
+#sysbus LoadELF @C:\Workspace\874x_A_32_01\cmake-build-GNU_STM32U5_Debug\UserArea\UserArea.elf
+#sysbus LoadELF @C:\Workspace\A.29.01\cmake-build-GNU_STM32U5_Debug\UserArea\UserArea.elf
+
 
 # Load SPI flash image
 spi3.w25q64.w25q64_mem LinkFile "resc/flash.img"
@@ -18,11 +21,20 @@ machine StartGdbServer 3333 true
 
 # Set Voltage to 24V
 adc4 SetDefaultValue 1700 11
+adc1 SetDefaultValue 1700 11
+
+
+
+#sysbus LogPeripheralAccess adc1 true
 
 # Set LogLevel
 logLevel 1
+#logLevel 0 i2c2
+#logLevel 0 spi3.w25q64
 
-# Set GPIOPins
+
+
+# Set alternate functions of GPIOPins for I2C2 
 gpioPortB OnGPIO 10 true
 gpioPortB OnGPIO 14 true
 
@@ -31,8 +43,8 @@ gpioPortA OnGPIO 11 true
 
 
 # Load JSON sensor replay data
-#i2c2.sensor LoadJson "src/Infrastructure/src/Emulator/Peripherals/Peripherals/Sensors/Coriolis_Replaysensor/Recordings/04.03.26_Rampe0-100.json"
-i2c2.sensor LoadJson "src/Infrastructure/src/Emulator/Peripherals/Peripherals/Sensors/Coriolis_Replaysensor/Recordings/04.03.26_Rampe100-0.json"
+i2c2.sensor LoadJson "src/Infrastructure/src/Emulator/Peripherals/Peripherals/Sensors/Coriolis_Replaysensor/Recordings/04.03.26_Rampe0-100.json"
+#i2c2.sensor LoadJson "src/Infrastructure/src/Emulator/Peripherals/Peripherals/Sensors/Coriolis_Replaysensor/Recordings/04.03.26_Rampe100-0.json"
 #i2c2.sensor LoadJson "src/Infrastructure/src/Emulator/Peripherals/Peripherals/Sensors/Coriolis_Replaysensor/Recordings/04.03.26_Sprunge.json"
 logLevel 1 i2c2.sensor
 

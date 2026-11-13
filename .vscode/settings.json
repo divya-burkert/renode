@@ -1,4 +1,19 @@
 {
-    "workspacePointer": "${workspaceFolder}",
-    "cmake.sourceDirectory": "C:/Workspace/renode/renode/tools/external_control_client",
+    "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
+    "clangd.arguments":[        
+    "--query-driver=*arm-none-eabi-*",
+    "--clang-tidy",
+    "--pretty",
+    "--background-index" 
+    ],
+    "clang-format.executable": "C:/toolchain/tools/LLVM/bin/clang-format.exe",
+    
+    "cpp.creator.setPath": "true",
+    "cpp.creator.headerFileNamePreset": "{{*CLASSNAME*}}.hpp",
+    "cpp.creator.headerFileContentPreset": "/** \n \\copyright (c) Copyright 2023 Buerkert Werke GmbH & Co KG. All Rights Reserved.\n \\file {{*HEADERFILENAME*}} \n*/\n\n",
+    "cpp.creator.sourceFileContentPreset": "/** \n \\copyright (c) Copyright 2023 Buerkert Werke GmbH & Co KG. All Rights Reserved.\n \\file {{*SOURCEFILENAME*}} \n*/\n\n#include \"{{*HEADERFILENAME*}}\"\n\n/**\n \\brief Example\n \\details Example\n*/\n{{*CLASSNAME*}}::{{*CLASSNAME*}}()\n{\n\n}\n\n{{*CLASSNAME*}}::~{{*CLASSNAME*}}()\n{\n\n}",
+    "files.associations": {
+        "embos_interruptfunctions.h": "c"
+    },
+    "cmake.sourceDirectory": "C:/Workspace/renode/tools/external_control_client"
 }
